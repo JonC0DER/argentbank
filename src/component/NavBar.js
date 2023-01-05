@@ -6,7 +6,7 @@ export const NavBar = () => {
 
   const userToken = useSelector(selectUserToken)
 
-  const LoggedIn = () => (
+  const LoggedInNav = () => (
     <>
       <NavLink className="main-nav-item" to="/user-account">
         <i className="fa fa-user-circle"></i>
@@ -19,7 +19,7 @@ export const NavBar = () => {
     </>
   )
 
-  const SignIn = () => (
+  const SignInNav = () => (
     <>
       <NavLink className="main-nav-item" to="/sign-in">
         <i className="fa fa-user-circle"></i>
@@ -38,7 +38,7 @@ export const NavBar = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </NavLink>
       <div> 
-        {!userToken ? <SignIn/>: <LoggedIn/>}
+        {!userToken ? <SignInNav/>: <LoggedInNav/>}
       </div>
     </nav>
   )
