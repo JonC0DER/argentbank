@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from '../pages/Home'
 import NavBar from './NavBar'
-import SignInOrUserAccount from '../pages/SignInOrUserAccount'
-import SignOut from '../pages/SignOut'
+import OnSignOut from '../component/services/OnSignOut'
+import LoadSignInOrUserProfile from './services/LoadSignInOrUserProfile'
 
 const RouterLogic = () => {
   return (
@@ -11,12 +11,12 @@ const RouterLogic = () => {
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/sign-in" element={
-              <SignInOrUserAccount />
+              <LoadSignInOrUserProfile />
             } />
             <Route path="/user-account" element={
-              <SignInOrUserAccount />
+              <LoadSignInOrUserProfile />
             } />
-            <Route path='/sign-out' element={<SignOut/>} />
+            <Route path='/sign-out' element={<OnSignOut/>} />
           </Routes>
       </BrowserRouter>
   )
