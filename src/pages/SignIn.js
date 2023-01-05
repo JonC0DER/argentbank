@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchLoginToken, loadUserAccount } from '../API/apiManager';
-import { selectUserToken } from '../redux_components/Reducer';
-//import { loginAdd } from '../redux_components/Reducer';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchLoginToken } from '../API/apiManager';
 
 const SignIn = () => {
   const dispatch = useDispatch()
@@ -22,7 +20,7 @@ const SignIn = () => {
       try {
         dispatch( 
           fetchLoginToken({ email, password })
-        )//.unwrap()
+        ).unwrap()
       } catch (error) {
         console.log('Failed to log In ', error)
       }
