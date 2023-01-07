@@ -27,5 +27,10 @@ export const updateEditUser = createAsyncThunk('user/profile/edit', async (initi
     headers: { 'Authorization': token }
   })
   const response = await instance.put(LINK + 'profile', names)
-  return response
+  return response.data
+})
+
+export const registerUser = createAsyncThunk('user/signup', async (initialRegistration) => {
+  const response = await axios.post(LINK + 'signup', initialRegistration)
+  return response.data
 })
