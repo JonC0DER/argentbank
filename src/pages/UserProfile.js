@@ -1,72 +1,24 @@
 import { useDispatch, useSelector } from "react-redux"
-import { getUserProfile, getUserProfileStatus, selectUserToken } from "../redux_components/Reducer"
-import { Suspense, useState } from "react"
+import { editProfile, getEditBtnProfile, getUserProfile, getUserProfileStatus, selectUserToken } from "../redux_components/Reducer"
+import { Suspense } from "react"
 import Loading from "../component/Loading"
-import { updateEditUser } from "../API/apiManager"
+import { EditMode } from "../component/EditMode"
 
 const UserProfile = () => {
   const dispatch = useDispatch()
 
   const profile = useSelector(getUserProfile)
   const profileStatus = useSelector(getUserProfileStatus)
-  const token = useSelector(selectUserToken)
 
-  const [bool, setBool] = useState(false)
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
+  const editBtn = useSelector(getEditBtnProfile)
 
-  const onEdit = () => setBool(true)
-
-  const onChangeFirstName = (e) => setFirstName(e.target.value)
-  const onChangeLastName = (e) => setLastName(e.target.value)
-
-  const canSave = [firstName, lastName].every(Boolean)
-
-  const save = () => {
-    if (canSave) {
-      try {
-        dispatch(updateEditUser({ firstName, lastName, token }))
-      } catch (error) {
-        console.log('Failed to save the edition', error)
-      }
-
-      setFirstName('')
-      setLastName('')
+  const onEdit = () => {
+    try {
+      dispatch(editProfile(true))
+    } catch (error) {
+      console.log('Failed to set True value to edit btn, ', error)
     }
   }
-
-  const cancel = () => {
-    setFirstName('')
-    setLastName('')
-  }
-
-  const EditMode = () => (
-    <div className="header">
-      <h1>Welcome back</h1>
-      <form>
-        <input
-          id="firstname"
-          type="text"
-          value={firstName}
-          onChange={onChangeFirstName}
-        />
-        <input
-          id="lastname"
-          type="text"
-          value={lastName}
-          onChange={onChangeLastName}
-        />
-        <button
-          onClick={save}
-          className="save-edit-btn"
-        >Save</button>
-        <button
-          onClick={cancel}
-          className="cancel-edit-btn"
-        >Cancel</button>
-      </form>
-    </div>
-  )
 
   const Standard = ({ name }) => (
     <div className="header">
@@ -81,7 +33,7 @@ const UserProfile = () => {
   const ContentAccount = ({ data }) => (
     <main className='main bg-dark'>
       <span className="user-profile-message">{data.message}</span>
-      {bool
+      {editBtn
         ? <EditMode />
         : <Standard name={{ first: data.body.firstName, last: data.body.lastName }} />
       }
@@ -120,9 +72,9 @@ const UserProfile = () => {
   )
 
   const UserProfileIsLoad = () => (
-    profileStatus === "succeeded"
+    profileStatus === 200
       ? <ContentAccount data={profile} />
-      : <Loading />
+      : <Loading msg={'Loading user Profile'} />
   )
 
   return (
