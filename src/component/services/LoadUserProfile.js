@@ -1,37 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux"
 import { loadUserAccount } from "../../API/apiManager"
 import UserProfile from "../../pages/UserProfile"
 
-export const LoadUserProfile = ({userToken}) => {
+export const LoadUserProfile = ({ userToken }) => {
   const dispatch = useDispatch()
   const [bool, setBool] = useState(false)
-  
-  const onLoadingUserAccount = () =>{
 
+  useEffect(() => {
     if (userToken) {
-      try {   
-        dispatch( loadUserAccount(userToken) )//.unwrap()
+      dispatch(loadUserAccount(userToken)).then(() => {
         setBool(true)
-        //return true
-      } catch (error) {
+      }).catch((error) => {
         console.log('Failed to load user Profile', error)
         setBool(false)
-        //return false
-      }
+      })
     }
-  }
+  }, [userToken]) // eslint-disable-line
 
-  const IsAccountLoaded = () => {
-    onLoadingUserAccount()
-    return (
-      <>
-        {bool && <UserProfile/>}
-      </>
-    )
-  }
-
-  return (<IsAccountLoaded/>)
+  return (
+    <>
+      {bool && <UserProfile />}
+    </>
+  )
 }
 
 export default LoadUserProfile
