@@ -38,7 +38,6 @@ Clone this current repository, then follow these following command:
     - npm install
 
     ```json
-
         "dependencies": {
             "@reduxjs/toolkit": "^1.9.1",
             "@testing-library/jest-dom": "^5.16.5",
@@ -54,7 +53,6 @@ Clone this current repository, then follow these following command:
             "react-scripts": "5.0.1",
             "web-vitals": "^2.1.4"
         }
-
 ```
 
     Then start the Front-end
