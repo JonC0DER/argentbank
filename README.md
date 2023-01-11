@@ -32,12 +32,14 @@ you can find the Back-end [Here!](https://github.com/OpenClassrooms-Student-Cent
 Clone this current repository, then follow these following command:
 
     Go to the front-end folder.
+
     - cd argentbank/
 
     Install all the dependencies.
+
     - npm install
 
-    ```json
+        ```json
         "dependencies": {
             "@reduxjs/toolkit": "^1.9.1",
             "@testing-library/jest-dom": "^5.16.5",
@@ -53,11 +55,11 @@ Clone this current repository, then follow these following command:
             "react-scripts": "5.0.1",
             "web-vitals": "^2.1.4"
         }
-```
+        ```
 
     Then start the Front-end
+
     - npm start
 
 The Project will be available in this address [http://localhost:3000](http://localhost:3000)
 Enjoy !!
-```
